@@ -1,17 +1,21 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useNavigate } from 'react-router'
+import { BlogStore } from '../context/BlogContext'
 
 const Card = ({elem}) => {
+  let {mode } = useContext(BlogStore)
   let navigate =useNavigate()
   return (
-    <div onClick={()=>navigate(`/blog/${elem.id}`)} className='border-1 border-gray-700 w-80 h-fit rounded-[10px] p-5 mt-10 shadow-2xl'>
+    <div onClick={()=>navigate(`/blog/${elem.id}`)} className='border border-gray-200 w-80 h-100 rounded-[10px] p-5 mt-10 shadow-2xl mb-10  '>
       <div className='flex flex-col gap-1'>
         <div className='flex gap-2'>
-          <p className='bg-gray-200 px-2 py-1 rounded-[8px] text-[12px] font-semibold'>{elem.category[0]}</p>
-          <p className='bg-gray-200 px-2 py-1 rounded-[8px] text-[12px] font-semibold'>{elem.category[1]}</p>
+          {elem.category.map((i)=>{
+            return <p className={`bg-gray-200 px-2 py-1 rounded-[8px] text-[12px] font-semibold ${mode?"bg-gray-400":""}`}>{i}</p>
+          
+          })}
         </div>
         <div>
-          <p className='bg-gray-200 px-2 py-1 rounded-[8px] w-fit text-[12px] font-semibold'>{elem.category[2]}</p>
+          
         </div>
       </div>
       <p className='font-bold text-xl mt-1 w-[60%]'>{elem.title}</p>
