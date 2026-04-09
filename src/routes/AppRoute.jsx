@@ -11,6 +11,7 @@ import NewBlogCard from '../components/NewBlogCard'
 import DashboardLayout from '../layout/DashboardLayout'
 import { ToastContainer, toast } from 'react-toastify';
 import AuthRoute from './AuthRoute'
+import ProtectRoute from './ProtectRoute'
 
 const AppRoute = () => {
     let router = createBrowserRouter([
@@ -48,15 +49,20 @@ const AppRoute = () => {
         },
         {
             path: "/dashboard",
-            element: <DashboardLayout />,
+            element: <ProtectRoute />,
             children: [
                 {
-                    path: "",
-                    element: <Admin />
-                }
-                , {
-                    path: "new",
-                    element: <NewBlogCard />
+                    element: <DashboardLayout />,
+                    children: [
+                        {
+                            path: "",
+                            element: <Admin />
+                        }
+                        , {
+                            path: "new",
+                            element: <NewBlogCard />
+                        }
+                    ]
                 }
             ]
         }

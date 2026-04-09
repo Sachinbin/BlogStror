@@ -16,14 +16,15 @@ const Login = () => {
     let { user, setUser, mode, isLoggedIn, setIsLoggedIn } = useContext(BlogStore)
     console.log(user)
     let handleSub = (data) => {
+        console.log(data)
 
         let res = user.find((elem) => {
-            return elem.email == data && elem.password == data.password
+            return elem.email == data.email && elem.password == data.password
         })
         console.log(res)
         if (!res) {
             toast.error("unauthorized User!")
-            return <Navigate to={'/auth'} />
+            return ;
         }
         
         setIsLoggedIn(res)
@@ -47,7 +48,7 @@ const Login = () => {
                     <div className=' flex flex-col '>
                         <label className='mb-3'>Email</label>
                         <input
-                            {...register("name", { required: true })}
+                            {...register("email", { required: true })}
                             className='border border-gray-200 px-3 py-2 rounded-[6px] w-90'
                             type="email"
                             placeholder='example@gmail.com' />
@@ -55,7 +56,7 @@ const Login = () => {
                     <div className=' flex flex-col '>
                         <label className='mb-3'>Password</label>
                         <input
-                            {...register("email", { required: "Fill all Field" })}
+                            {...register("password", { required: "Fill all Field" })}
                             type="password"
                             className='border border-gray-200 px-3 py-2 rounded-[6px] w-90'
                             placeholder='Enter the Password' />
