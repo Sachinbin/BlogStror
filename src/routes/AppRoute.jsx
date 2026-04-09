@@ -6,6 +6,11 @@ import BlogDetails from '../page/BlogDetails'
 import AuthLayout from '../layout/AuthLayout'
 import Login from '../components/Login'
 import Register from '../components/Register'
+import Admin from '../page/Admin'
+import NewBlogCard from '../components/NewBlogCard'
+import DashboardLayout from '../layout/DashboardLayout'
+import { ToastContainer, toast } from 'react-toastify';
+import AuthRoute from './AuthRoute'
 
 const AppRoute = () => {
     let router = createBrowserRouter([
@@ -18,26 +23,48 @@ const AppRoute = () => {
                     element: <Home />
                 },
                 {
-                    path:'/blog/:id',
-                    element:<BlogDetails/>
+                    path: '/blog/:id',
+                    element: <BlogDetails />
                 }
             ]
-        },{
-            path:"/auth",
-            element:<AuthLayout/>,
-            children:[
+        }, {
+            path: "/auth",
+            element: <AuthRoute />,
+            children: [
                 {
-                    path:'',
-                    element:<Login/>
-                },
+                    element: <AuthLayout />,
+                    children: [
+                        {
+                            path: '',
+                            element: <Login />
+                        },
+                        {
+                            path: "register",
+                            element: <Register />
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            path: "/dashboard",
+            element: <DashboardLayout />,
+            children: [
                 {
-                    path:"register",
-                    element:<Register/>
+                    path: "",
+                    element: <Admin />
+                }
+                , {
+                    path: "new",
+                    element: <NewBlogCard />
                 }
             ]
         }
     ])
-    return <RouterProvider router={router} />
+    return (<>
+        <RouterProvider router={router} />
+        <ToastContainer />
+    </>)
 }
 
 export default AppRoute

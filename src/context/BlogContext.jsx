@@ -6,14 +6,20 @@ export let BlogStore = createContext()
 export let BlogProvider = ({children}) => {
     let [blogformData,setBlogFormData] = useState(blogData)
     let[mode,setMode] = useState(false)
-    // console.log(blogformData)
+    let [user,setUser]=useState(JSON.parse(localStorage.getItem("regUser")) || [])
+    let [isLoggedIn,setIsLoggedIn] = useState( null)
+    console.log(isLoggedIn)
    
     return (
         <BlogStore.Provider value={{
             blogformData,
             setBlogFormData,
             mode,
-            setMode
+            setMode,
+            user,
+            setUser,
+            isLoggedIn,
+            setIsLoggedIn
         }}>{children}</BlogStore.Provider>
     )
 }
