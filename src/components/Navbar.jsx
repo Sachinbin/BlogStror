@@ -44,13 +44,13 @@ const Navbar = () => {
           <p className='text-[12px] text-gray-700'>{isLoggedIn?.email}</p>
           <p className='text-[12px] text-gray-700'>Auther</p>
         </div>
-        <hr />
+        <div className='w-full h-[0.5px] bg-gray-200'></div>
         <div onClick={()=>navigate('/dashboard')}
          className=' px-3 py-1 flex gap-3 items-center text-gray-600 hover:bg-green-500  hover:text-white'>
           <i class="fa-solid fa-list"></i>
           <h1 className='text-sm text-black'>Dashboard</h1>
         </div>
-        <hr />
+        <div className='w-full h-[0.5px] bg-gray-200'></div>
         <div onClick={()=>{
           setIsLoggedIn(null)
           localStorage.removeItem("logUr")
@@ -58,7 +58,7 @@ const Navbar = () => {
           navigate("/auth")
         }} className=' px-3 py-1 flex gap-3 items-center text-gray-600 hover:bg-green-500 rounded-b-[14px]'>
           <i class="fa-solid fa-arrow-right-from-bracket"></i>
-          <h1 className='text-red-600'>Logout</h1>
+          <h1 className='text-red-500'>Logout</h1>
         </div>
 
       </div>:""}

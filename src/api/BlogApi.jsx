@@ -1,3 +1,6 @@
+import { useContext, useEffect } from "react";
+import { BlogStore } from "../context/BlogContext";
+let {setBlogFormData} = useContext(BlogStore)
 const blogData = [
   {
     id: 1,
@@ -73,4 +76,11 @@ const blogData = [
   }
 ];
 
-export default blogData;
+
+useEffect(()=>{
+  (async()=>{
+    blogData.map((elem)=>{
+      setBlogFormData(elem)
+    })
+  })()
+},[])

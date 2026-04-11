@@ -9,7 +9,7 @@ const Card = ({elem}) => {
     <div onClick={()=>navigate(`/blog/${elem.id}`)} className='border border-gray-200 w-80 h-100 rounded-[10px] p-5 mt-10 shadow-2xl mb-10  '>
       <div className='flex flex-col gap-1'>
         <div className='flex gap-2'>
-          {elem.category.map((i)=>{
+          {(elem.category || [])?.map((i)=>{
             return <p className={`bg-gray-200 px-2 py-1 rounded-[8px] text-[12px] font-semibold ${mode?"bg-gray-400":""}`}>{i}</p>
           
           })}

@@ -4,9 +4,9 @@ import { BlogStore } from '../context/BlogContext'
 
 const Admin = () => {
     let navigate =useNavigate()
-    let {mode} = useContext(BlogStore)
+    let {mode,setLoggedOut} = useContext(BlogStore)
     return (
-        <div className={`py-30 px-[180px] ${mode?"bg-black text-white":""}`}>
+        <div onDoubleClick={()=>setLoggedOut((prev)=>!prev)} className={`py-30 px-[180px] ${mode?"bg-black text-white":""}`}>
             <div className='flex justify-between items-center mb-10'>
                 <div >
                     <h1 className='text-3xl font-bold'>Dashboard</h1>

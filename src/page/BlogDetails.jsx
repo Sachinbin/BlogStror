@@ -6,22 +6,26 @@ import BlogContent from '../components/BlogContent'
 const BlogDetails = () => {
   let navigate = useNavigate()
   let { id } = useParams()
-  let { blogformData ,mode} = useContext(BlogStore);
+  let { blogformData ,mode,setLoggedOut} = useContext(BlogStore);
   let item = blogformData.find((elem) => elem.id === Number(id));
-  // console.log(item)
+  console.log(id)
+  console.log(item)
 
+  if (!item) {
+  return <h1 className='px-[180px] text-3xl font-bold mt-20'>Loading...</h1>
+}
   return (
-    <div className={`w-full flex justify-center py-30 ${mode?"bg-black text-white":""}`}>
+    <div  className={`w-full flex justify-center py-30 ${mode?"bg-black text-white":""}`}>
       <div className='w-[60%]'>
 
-        <p onClick={() => navigate("/")} className='text-gray-500 text-[15px] cursor-pointer mb-7'>
+        <p onClick={() => navigate("/")} className='text-gray-500 w-fit text-[15px] cursor-pointer mb-7'>
           ← Back to Articles
         </p>
 
 
         <div className='flex gap-2 mb-3 flex-wrap'>
-          {item.category.map((elem) => {
-           return <p className={`bg-gray-200 px-2 py-1 rounded-[8px] text-[12px] font-semibold  ${mode?"bg-gray-400":""}`}>{elem}</p>
+          {(item.category || [])?.map((elem) => {
+           return <p className={`bg-gray-200 px-2 py-1 rounded-[8px] text-[12px] font-semibold  ${mode?"bg-gray-400":""}`} >{elem}</p>
           })}
         </div>
 
@@ -43,11 +47,11 @@ const BlogDetails = () => {
 
         <div className=' leading-7'>
           <p className='mb-10'>
-           {item.description}
+           {(item || null)?.description}
           </p>
 
           {
-            item.content.map((elem) => {
+            (item.content || [])?.map((elem) => {
               return <BlogContent elem={elem} key={elem.id}/>
             })
           }
